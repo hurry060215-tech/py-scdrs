@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyscdrs"
+version = "0.1.0"
+description = "Clean pure-Python reimplementation of scDRS — single-cell disease-relevance scoring from GWAS gene sets."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Zehua Zeng", email = "starlitnightly@163.com" },
+]
+keywords = [
+    "scDRS", "single-cell", "disease-relevance-score", "GWAS",
+    "MAGMA", "polygenic", "gene-set", "scRNA-seq", "anndata",
+    "omicverse", "cell-type-enrichment",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+dependencies = [
+    "numpy>=1.23",
+    "scipy>=1.10",
+    "pandas>=1.5",
+    "anndata>=0.8",
+    "scanpy>=1.9",
+    "scikit-misc>=0.1.4",
+    "statsmodels>=0.13",
+    "tqdm>=4.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "pytest-cov", "ruff", "matplotlib>=3.6"]
+
+[project.scripts]
+pyscdrs = "pyscdrs.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/omicverse/py-scdrs"
+Repository = "https://github.com/omicverse/py-scdrs"
+Issues = "https://github.com/omicverse/py-scdrs/issues"
+"Upstream scDRS package" = "https://github.com/martinjzhang/scDRS"
+"Upstream (omicverse)" = "https://github.com/Starlitnightly/omicverse"
+
+[tool.setuptools.packages.find]
+include = ["pyscdrs*"]
+exclude = ["tests*", "examples*", "scdrs-ref*"]
+
+[tool.setuptools.package-data]
+pyscdrs = ["data/*.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::FutureWarning",
+    "ignore::RuntimeWarning",
+]
